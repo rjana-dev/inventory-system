@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [products, setProducts] = useState([]);
 
+  //This is just a test to check wheather the front end is connected to backend and fetches the data
   useEffect(() => {
     fetch("http://localhost:8888/api/products")
       .then((res) => res.json())
