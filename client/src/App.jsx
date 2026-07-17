@@ -1,31 +1,10 @@
-import { useEffect, useState } from "react";
+import AddProduct from "./components/AddProduct";
 
 function App() {
-  const [products, setProducts] = useState([]);
-
-  //This is just a test to check wheather the front end is connected to backend and fetches the data
-  useEffect(() => {
-    fetch("http://localhost:8888/api/products")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setProducts(data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
   return (
     <div>
-      <h1>Inventory Products</h1>
-
-      {products.map((p) => (
-        <div key={p._id}>
-          <h3>{p.name}</h3>
-          <p>Price: {p.price}</p>
-          <p>Quantity: {p.quantity}</p>
-          <hr />
-        </div>
-      ))}
+      <h1>Inventory System</h1>
+      <AddProduct />
     </div>
   );
 }
