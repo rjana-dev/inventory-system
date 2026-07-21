@@ -1,10 +1,11 @@
-import AddProduct from "./components/AddProduct";
+import Topnavbar from "./components/Topnavbar"
+import Sidenavbar from "./components/Sidenavbar"
 
 function App() {
   return (
     <div>
-      <h1>Inventory System</h1>
-      <AddProduct />
+        <Topnavbar />
+        <Sidenavbar />
     </div>
   );
 }
