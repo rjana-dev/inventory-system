@@ -1,0 +1,314 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    color: #252b38;
+    box-sizing: border-box;
+}
+
+.add-product-page{
+    width: 95%;
+    max-width: 1250px;
+    margin: 35px auto;
+}
+
+.page-header{
+    margin-bottom: 30px;
+}
+
+.page-header h1{
+    color: #064da8;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.page-header p{
+    color: #626878;
+    font-size: 17px;
+}
+
+.main-content{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+}
+
+.left-column, .right-column{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.card{
+    background-color: white;
+    border: 1px solid #d9dce5;
+    border-radius: 5px;
+    padding: 32px;
+}
+
+.card-title{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-title img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.card-title h2{
+    font-size: 22px;
+    color: #252b38;
+}
+
+.divider{
+    height: 2px;
+    background-color: #d9dce5;
+    margin: 20px 0 25px;
+}
+
+.form-group{
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    display: block;
+}
+
+.form-group label{
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #626878;
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+}
+
+input, select, textarea{
+    width: 100px;
+    border: 2px solid #d9dce5;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 16px;
+    color: #343945;
+    background-color: white;
+    outline: none;
+    font-family: inherit;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #1769c2;
+}
+
+input::placeholder, text-area::placeholder {
+    color: #9298a5;
+}
+
+.form-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.sku-group{
+    display: flex;
+}
+
+.sku-group span{
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    background-color: #f0f1f7;
+    border: 2px solid #d9dce5;
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+    color: #656b78;
+    font-size: 16px;
+}
+
+.sku-group input{
+    border-radius: 0 5px 5px 0;
+}
+
+textarea{
+    height: 135px;
+    resize: vertical;
+}
+
+.price-input{
+    display: flex;
+    align-items: center;
+    border: 2px solid #d9dce5;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.price-input span{
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #075bb9;
+}
+
+.price-input input{
+    border: none;
+    border-radius: 0;
+}
+
+.margin-box{
+    background-color: #eef0fa;
+    border: 2px solid #d9dce5;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.margin-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.margin-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.margin-header span{
+    font-size: 13px;
+    font-weight: bold;
+    color: #626878;
+}
+
+.margin-header strong{
+    color: #3d6eb8;
+    font-size: 18px;
+}
+
+.margin-bar{
+    height: 5px;
+    background-color: #cbd0df;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.margin-progress{
+    width: 24.5%;
+    height: 100%;
+    background-color: #075bb9;
+}
+
+.upload-area{
+    border: 2px dashed #cbd0df;
+    border-radius: 5px;
+    height: 200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.upload-icon{
+    font-size: 45px;
+    color: #555c6c;
+    margin-bottom: 10px;
+}
+
+.upload-area p{
+    font-size: 18px;
+    color: #555c6c;
+    margin-bottom: 8px;
+}
+
+.upload-area span{
+    font-size: 13px;
+    color: #555c6c;
+    margin-bottom: 15px;
+}
+
+.browse-link{
+    color: #075bb9 !important;
+    text-decoration: underline;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    cursor: pointer;
+}
+
+small{
+    display: block;
+    margin-top: 5px;
+    color: #777d89;
+    font-size: 11px;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+.button-group{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.save-btn{
+    padding: 15px 20px;
+    background-color: #064da8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+.cancel-btn{
+    padding: 15px 20px;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+/* 
+Responsiveness
+*/
+
+@media screen and (max-width: 900px) {
+
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .container {
+        width: 92%;
+        margin: 20px auto;
+    }
+
+    .page-header h1 {
+        font-size: 28px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+}
+

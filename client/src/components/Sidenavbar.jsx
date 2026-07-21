@@ -1,6 +1,6 @@
 import "./Sidenavbar.css";
 import profileImg from "../assets/prof.jpg";
-import logoutImg from "../assets/logout.jpg"
+import logoutImg from "../assets/logout.jpg";
 
 function Sidenavbar() {
     return (
@@ -14,8 +14,8 @@ function Sidenavbar() {
                 </div>
 
                 <nav className="menu">
-                    <a href="#" className="menu-item active">Dashboard</a>
-                    <a href="#" className="menu-item">Add Products</a>
+                    <a href="#" className="menu-item">Dashboard</a>
+                    <a href="#" className="menu-item active">Add Products</a>
                     <a href="#" className="menu-item">Update Products</a>
                     <a href="#" className="menu-item">Inventory</a>
                 </nav>
