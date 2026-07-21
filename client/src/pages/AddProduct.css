@@ -271,13 +271,6 @@ small{
     outline: none;
 }
 
-.cancel-btn{
-    padding: 15px 20px;
-    background-color: red;
-    color: white;
-    border-radius: 5px;
-    border: none;
-}
 
 /* 
 Responsiveness
