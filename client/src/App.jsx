@@ -1,6 +1,7 @@
 import Topnavbar from "./components/Topnavbar"
 import Sidenavbar from "./components/Sidenavbar"
 import AddProduct from "./pages/AddProduct"
+import Inventory from "./pages/Inventory";
 import "../src/App.css";
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
           <Topnavbar />
 
           <div className="page-content">
-            <AddProduct />
+            <Inventory />
           </div>
         </div>
     </div>
