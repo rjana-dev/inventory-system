@@ -16,8 +16,8 @@ function Sidenavbar() {
                 <nav className="menu">
                     <a href="#" className="menu-item">Dashboard</a>
                     <a href="#" className="menu-item active">Add Products</a>
-                    <a href="#" className="menu-item">Update Products</a>
                     <a href="#" className="menu-item">Inventory</a>
+                    <a href="#" className="menu-item">Users</a>
                 </nav>
 
                 <div className="lower-navbar">
