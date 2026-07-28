@@ -1,66 +1,21 @@
 const express = require("express");
 const router = express.Router();
 
-const Product = require("../models/Product");
+const ProductController = require("../controllers/ProductController");
 
-//Create Product
-router.post("/", async (req, res) => {
-  try {
-    const product = new Product(req.body);
-    const savedProduct = await product.save();
-    res.json(savedProduct);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+//create Product
+router.post("/", ProductController.createProduct);
 
-//Read Product
-router.get("/", async (req, res) => {
-    try {
-        const product = await Product.find();
-        res.json(product);
-    } catch (error) {
-        res.status(500).json({ error: error.message});
-    }
-});
+//get all Products
+router.get("/", ProductController.getAllProducts);
 
-//To fetch product details by id
-router.get("/:id", async (req, res) => {
-    try {
-        const product = await Product.findById(req.params.id);
-        if (!product) {
-            return res.status(404).json({ error: "Product not found" });
-        }
-        res.json(product);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+//get Product By ID
+router.get("/:id", ProductController.getProductById);
 
-//Update Product
-router.put("/:id", async (req, res) => {
-    try {
-        const updatedProduct = await Product.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true}
-        );
+//update Product
+router.put("/:id", ProductController.updateProduct);
 
-        res.json(updatedProduct);
-    } catch (error) {
-        res.status(500).json({ error: error.message});
-    }
-});
-
-//Delete Product
-router.delete("/:id", async (req, res) => {
-    try{
-        await Product.findByIdAndDelete(req.params.id);
-        res.json({message : "Product Deletion Successful"});
-    } catch (error){
-        res.status(500).json({ error: error.message});
-    }
-});
-
+//delete Product
+router.delete("/:id", ProductController.deleteProduct);
 
 module.exports = router;

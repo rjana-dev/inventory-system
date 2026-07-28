@@ -1,11 +1,11 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import "./EditProduct.css"
 import infoImg from "../assets/info.png";
 import imageImg from "../assets/image.png";
 import moneyImg from "../assets/money.png";
 import checklistImg from "../assets/checklist.jpg";
+import { getProductById, updatedProduct } from "../api/productApi";
 
 function EditProduct() {
 
@@ -28,9 +28,7 @@ function EditProduct() {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(
-                    `http://localhost:8888/api/products/${id}`
-                );
+                const response = await getProductById(id);
                 setFormData(response.data);
             } catch (error) {
                 console.error("Error fetching product:", error);
@@ -62,10 +60,7 @@ function EditProduct() {
         };
 
         try {
-            await axios.put(
-                `http://localhost:8888/api/products/${id}`,
-                productData
-            );
+            await updatedProduct(id, formData);
             alert("Product updated successfully!");
             navigate("/");
         } catch (error) {

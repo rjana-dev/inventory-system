@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import Topnavbar from "../components/Topnavbar";
 import Sidenavbar from "../components/Sidenavbar";
 import "./Layout.css";
@@ -11,7 +12,7 @@ function Layout({children}) {
             <Topnavbar />
 
             <div className="page-content">
-                {children}
+                <Outlet />
             </div>
         </div>
     </div>

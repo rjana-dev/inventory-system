@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import axios from "axios";
 import "./AddProduct.css"
 import infoImg from "../assets/info.png";
 import imageImg from "../assets/image.png";
 import moneyImg from "../assets/money.png";
 import checklistImg from "../assets/checklist.jpg";
+import { createProduct } from "../api/productApi";
 
 function AddProduct() {
     
@@ -34,17 +34,14 @@ function AddProduct() {
         const productData = {
             ...formData,
 
-            costprice: Number(formData.costprice),
+            costPrice: Number(formData.costprice),
             price: Number(formData.price),
             initialStockLevel: Number(formData.initialStockLevel),
             lowStockLevel: Number(formData.lowStockLevel)
         };
 
         try {
-            const response = await axios.post(
-                "http://localhost:8888/api/products",
-                productData
-            );
+            const response = await createProduct(productData);
 
             console.log("Product created:", response.data);
 

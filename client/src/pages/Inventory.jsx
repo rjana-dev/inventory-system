@@ -3,7 +3,7 @@ import "./Inventory.css";
 import downloadImg from "../assets/download.jpg";
 import addImg from "../assets/add.png"
 import {useEffect, useState} from "react";
-import axios from "axios";
+import { getProducts, deleteProduct } from '../api/productApi';
 
 function Inventory() {
 
@@ -15,9 +15,7 @@ function Inventory() {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get(
-                "http://localhost:8888/api/products"
-            );
+            const response = await getProducts();
 
             setProducts(response.data);
 
@@ -46,7 +44,7 @@ function Inventory() {
         if (!confirmDelete) return;
 
         try {
-            await axios.delete(`http://localhost:8888/api/products/${id}`);
+            await deleteProduct(id);
             fetchProducts();
             setOpenMenu(null);
         }
