@@ -34,7 +34,7 @@ function AddProduct() {
         const productData = {
             ...formData,
 
-            costPrice: Number(formData.costprice),
+            costPrice: Number(formData.costPrice),
             price: Number(formData.price),
             initialStockLevel: Number(formData.initialStockLevel),
             lowStockLevel: Number(formData.lowStockLevel)
@@ -49,7 +49,10 @@ function AddProduct() {
         } catch (error) {
             console.error("Error creating product:", error);
 
-            alert("Failed to add product!");
+            const errorMessage =
+                                error.response?.data?.error || "Failed to add product!";
+
+            alert(errorMessage);
         }
     };
 

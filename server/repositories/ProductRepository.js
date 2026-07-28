@@ -18,6 +18,11 @@ class ProductRepository {
         return await Product.findById(id);
     }
 
+    //get product by sku
+    async findBySKU(sku){
+        return await Product.findOne({sku});
+    }
+
     //Update Product
     async update(id, productData) {
         return await Product.findByIdAndUpdate(

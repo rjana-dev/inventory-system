@@ -4,6 +4,25 @@ class ProductService{
 
     //create Product
     async createProduct(productData) {
+        const {sku, costPrice, price } = productData;
+
+        if (sku) {
+            const existing = await ProductRepository.findBySKU(sku);
+            if (existing) {
+                const error = new Error(`SKU "${sku}" already in use`);
+                error.statusCode = 403;
+                throw error;
+            }
+
+        }
+
+        if (Number(price) <= Number(costPrice)) {
+            const error = new Error("Selling price must be higher than cost price");
+            error.statusCode = 400;
+            throw error;
+        }
+
+       
         return await ProductRepository.create(productData);
     }
 
