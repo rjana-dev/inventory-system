@@ -24,6 +24,19 @@ router.get("/", async (req, res) => {
     }
 });
 
+//To fetch product details by id
+router.get("/:id", async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        if (!product) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 //Update Product
 router.put("/:id", async (req, res) => {
     try {

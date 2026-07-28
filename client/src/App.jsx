@@ -1,23 +1,22 @@
+import {Routes, Route} from 'react-router-dom'
 import Topnavbar from "./components/Topnavbar"
 import Sidenavbar from "./components/Sidenavbar"
 import AddProduct from "./pages/AddProduct"
 import Inventory from "./pages/Inventory";
-import "../src/App.css";
+import EditProduct from "./pages/EditProduct";
+import Layout from "./layouts/Layout";
+import "./App.css";
+
 
 function App() {
   return (
-    <div className="app-layout">
-        <Sidenavbar />
-
-        <div className="main-column">
-          
-          <Topnavbar />
-
-          <div className="page-content">
-            <Inventory />
-          </div>
-        </div>
-    </div>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Inventory />} />
+        <Route path="/products/add" element={<AddProduct />} />
+        <Route path="/products/edit/:id" element={<EditProduct />} />
+      </Routes>
+    </Layout>
   );
 }
 

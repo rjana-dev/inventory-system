@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import "./Inventory.css";
 import downloadImg from "../assets/download.jpg";
 import addImg from "../assets/add.png"
@@ -5,6 +6,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 
 function Inventory() {
+
+    const navigate = useNavigate();
 
     const [products, setProducts] = useState([]);
 
@@ -35,11 +38,22 @@ function Inventory() {
     };
 
     const handleEdit = (product) => {
-        console.log("Edit: ", product);
+        navigate(`/products/edit/${product._id}`);
     };
 
-    const handleDelete = (id) => {
-        console.log("Delete: ", id);
+    const handleDelete = async (id) => {
+        const confirmDelete =window.confirm("Are you sure want to delete this product?");
+        if (!confirmDelete) return;
+
+        try {
+            await axios.delete(`http://localhost:8888/api/products/${id}`);
+            fetchProducts();
+            setOpenMenu(null);
+        }
+        catch (error) {
+            console.error("Error deleting product:", error);
+            alert("Failed to delete product!");
+        }
     };
 
     useEffect(() => {
