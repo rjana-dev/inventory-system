@@ -1,6 +1,7 @@
 import "./Topnavbar.css";
 import profileImg from "../assets/prof.jpg";
 import searchImg from "../assets/search.png"
+import { NavLink } from "react-router-dom";
 
 function Topnavbar() {
     return (
@@ -18,7 +19,10 @@ function Topnavbar() {
             <div className="right-navbar">
                 <span className="icon">🔔</span>
                 <span className="icon">❓</span>
-                <img src={profileImg} alt="profile" className="avatar"></img>
+                <div className="signup-card">
+                    <img src={profileImg} alt="profile" className="avatar"></img>
+                    <NavLink to="/signup" className="signup-txt">Sign Up</NavLink>
+                </div>
             </div>
 
         </div>
