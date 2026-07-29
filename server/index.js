@@ -12,6 +12,8 @@ app.use(cors());
 const productRoutes = require("./routes/productRoutes");
 app.use("/api/products", productRoutes);
 
+const userRoutes = require("./routes/userRoutes");
+app.use("/api/users", userRoutes);
 
 // CONNECT TO MONGODB
 mongoose.connect("mongodb://127.0.0.1:27017/inventoryDB")

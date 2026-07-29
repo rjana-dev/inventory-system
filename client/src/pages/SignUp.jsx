@@ -1,12 +1,15 @@
 import "./SignUp.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignUp() {
     return (
         <div className="signup-page">
 
             <div className="signup-container">
-                <div className="card">
-                    <div className="icon">📝</div>
+                <div className="signup-component-card">
+                    <div className="signup-img-icon">📝</div>
 
                     <h2>Create Account</h2>
                     <p>Register to access your inventory system</p>

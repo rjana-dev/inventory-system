@@ -6,7 +6,7 @@
   height: calc(100vh - 140px);
 }
 
-.card {
+.signup-component-card {
   width: 400px;
   background: #fff;
   padding: 35px;
@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-.icon {
+.signup-img-icon {
   font-size: 40px;
   margin-bottom: 10px;
 }
@@ -48,7 +48,7 @@ input {
   border-radius: 6px;
 }
 
-button {
+.signup-btn {
   width: 100%;
   margin-top: 20px;
   padding: 12px;
@@ -60,7 +60,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.signup-btn:hover {
   background: #163a82;
 }
 
