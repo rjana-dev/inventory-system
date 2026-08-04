@@ -47,6 +47,7 @@ function Inventory() {
             await deleteProduct(id);
             fetchProducts();
             setOpenMenu(null);
+            alert("Successfully deleted the Product!");
         }
         catch (error) {
             console.error("Error deleting product:", error);

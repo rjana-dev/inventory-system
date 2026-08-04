@@ -5,9 +5,12 @@ import imageImg from "../assets/image.png";
 import moneyImg from "../assets/money.png";
 import checklistImg from "../assets/checklist.jpg";
 import { createProduct } from "../api/productApi";
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
     
+    const navigate = useNavigate();
+
     const [formData, setformData] = useState ({
         name: "",
         costPrice: "",
@@ -46,11 +49,11 @@ function AddProduct() {
             console.log("Product created:", response.data);
 
             alert("Product added successfully!");
+            navigate("/");
         } catch (error) {
             console.error("Error creating product:", error);
 
-            const errorMessage =
-                                error.response?.data?.error || "Failed to add product!";
+            const errorMessage = error.response?.data?.error || "Failed to add product!";
 
             alert(errorMessage);
         }
