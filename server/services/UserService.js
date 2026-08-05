@@ -1,15 +1,24 @@
 const bcrypt = require("bcrypt");
 const UserRepository = require("../repositories/UserRepository");
+const { registerUserSchema } = require("../schemas/userSchema");
 
 class UserService {
 
     async createUser(userData) {
+        const parsed =registerUserSchema.safeParse(userData);
+
+        if(!parsed.success) {
+            const error = new Error(parsed.error.issue[0].message);
+            error.statusCode = 400;
+            throw error;
+        }
+
         const{
             fullName,
             username,
             mobileNumber,
             password
-        } = userData;
+        } = parsed.data;
 
         const existingUsername = await UserRepository.findByUsername(username);
 
@@ -19,17 +28,6 @@ class UserService {
             );
 
             error.statusCode = 409;
-            throw error;
-        }
-
-        const mobileRegex = /^(07)[01245678]\d{7}$/;
-
-        if (!mobileRegex.test(mobileNumber)) {
-            const error = new Error (
-                "Please enter a valid Sri Lankan mobile number."
-            );
-
-            error.statusCode = 400;
             throw error;
         }
 
@@ -44,21 +42,12 @@ class UserService {
             throw error;
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
-
-        if (!passwordRegex.test(password)) {
-            const error = new Error(
-                "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character."
-            );
-
-            error.statusCode = 400;
-            throw error;
-        }
-
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = {
-            ...userData,
+            fullName, 
+            username,
+            mobileNumber,
             password: hashedPassword
         };
 

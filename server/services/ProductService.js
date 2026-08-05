@@ -1,10 +1,19 @@
 const ProductRepository = require("../repositories/ProductRepository");
+const { productSchema } = require("../schemas/productSchema");
 
 class ProductService{
 
     //create Product
     async createProduct(productData) {
-        const {sku, costPrice, price } = productData;
+        const parsed = productSchema.safeParse(productData);
+
+        if (!parsed.success){
+            const error = new Error(parsed.error.issues[0].message);
+            error.statusCode = 400;
+            throw error;
+        }
+
+        const { sku } = parsed.data;
 
         if (sku) {
             const existing = await ProductRepository.findBySKU(sku);
@@ -15,15 +24,9 @@ class ProductService{
             }
 
         }
-
-        if (Number(price) <= Number(costPrice)) {
-            const error = new Error("Selling price must be higher than cost price");
-            error.statusCode = 400;
-            throw error;
-        }
-
        
-        return await ProductRepository.create(productData);
+        return await ProductRepository.create(parsed.data);
+        
     }
 
     //Get all products

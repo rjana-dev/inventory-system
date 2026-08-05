@@ -6,6 +6,7 @@ import moneyImg from "../assets/money.png";
 import checklistImg from "../assets/checklist.jpg";
 import { createProduct } from "../api/productApi";
 import { useNavigate } from "react-router-dom";
+import { productSchema } from "../schemas/productSchema";
 
 function AddProduct() {
     
@@ -22,6 +23,8 @@ function AddProduct() {
         lowStockLevel: 10
     });
 
+    const [errors, setErrors] = useState({});
+
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -34,17 +37,21 @@ function AddProduct() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const productData = {
-            ...formData,
+        const result = productSchema.safeParse(formData);
 
-            costPrice: Number(formData.costPrice),
-            price: Number(formData.price),
-            initialStockLevel: Number(formData.initialStockLevel),
-            lowStockLevel: Number(formData.lowStockLevel)
-        };
+        if(!result.success){
+            const fieldErrors = {};
+            result.error.issues.forEach((issue) => {
+                fieldErrors[issue.path[0]] = issue.message;
+            });
+            setErrors(fieldErrors);
+            return;
+        }
+
+        setErrors({});
 
         try {
-            const response = await createProduct(productData);
+            const response = await createProduct(result.data);
 
             console.log("Product created:", response.data);
 
@@ -89,6 +96,7 @@ function AddProduct() {
                                         value={formData.name}
                                         onChange={handleChange}
                                         placeholder="e.g. Pencil HB-02"/>
+                                        {errors.name && <span className="field-error">{errors.name}</span>}
                             </div>
 
                             <div className="form-row">
@@ -101,6 +109,7 @@ function AddProduct() {
                                             value={formData.sku}
                                             onChange={handleChange}
                                             placeholder="e.g. 000000"></input>
+                                            {errors.sku && <span className="field-error">{errors.sku}</span>}
                                 </div>
 
                                 <div className="form-group catagory-group">
@@ -116,6 +125,7 @@ function AddProduct() {
                                         <option value="Hardware & Electronics">Hardware & Electronics</option>
                                         <option value="Food & Beverages">Food & Beverages</option>
                                     </select>
+                                    {errors.category && <span className="field-error">{errors.category}</span>}
                                 </div>
                             </div>
 
@@ -128,6 +138,7 @@ function AddProduct() {
                                         onChange={handleChange}
                                         placeholder="Enter detailed specification, dimensions and material composition">
                                 </textarea>
+                                {errors.description && <span className="field-error">{errors.description}</span>}
                             </div>
                             
 
@@ -184,6 +195,7 @@ function AddProduct() {
                                             onChange={handleChange}
                                             placeholder="0.00"></input>
                                 </div>
+                                {errors.costPrice && <span className="field-error">{errors.costPrice}</span>}
 
                             </div>
 
@@ -199,6 +211,7 @@ function AddProduct() {
                                             onChange={handleChange}
                                             placeholder="0.00"></input>
                                 </div>
+                                {errors.price && <span className="field-error">{errors.price}</span>}
                                 
                             </div>
 
@@ -235,6 +248,7 @@ function AddProduct() {
                                         value={formData.initialStockLevel}
                                         onChange={handleChange}
                                         placeholder="0"></input>
+                                        {errors.initialStockLevel && <span className="field-error">{errors.initialStockLevel}</span>}
                             </div>
 
                             <div className="form-group">
@@ -245,6 +259,7 @@ function AddProduct() {
                                         value={formData.lowStockLevel}
                                         onChange={handleChange}
                                         placeholder="10"></input>
+                                        {errors.lowStockLevel && <span className="field-error">{errors.lowStockLevel}</span>}
                                 <small>System will alert when stock drops below this value.</small>
                             </div>
                         </div>
