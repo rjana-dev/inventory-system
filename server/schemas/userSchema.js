@@ -10,4 +10,9 @@ const registerUserSchema = z.object({
                 .regex(/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/, "Password must contain atleast 8 characters, including one uppercase, one number and one special character")
 });
 
-module.exports = {registerUserSchema};
+const loginUserSchema = z.object({
+    username: z.string().trim().min(1, "Username field cannot be empty!"),
+    password: z.string().trim().min(1, "Password field cannot be empty!")
+});
+
+module.exports = {registerUserSchema, loginUserSchema};

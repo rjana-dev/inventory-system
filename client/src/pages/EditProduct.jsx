@@ -6,10 +6,12 @@ import imageImg from "../assets/image.png";
 import moneyImg from "../assets/money.png";
 import checklistImg from "../assets/checklist.jpg";
 import { getProductById, updatedProduct } from "../api/productApi";
+import { productSchema } from "../schemas/productSchema";
 
 function EditProduct() {
 
     const { id } = useParams();
+
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -22,6 +24,8 @@ function EditProduct() {
         initialStockLevel: "",
         lowStockLevel: 10
     });
+
+    const [errors, setErrors] = useState({});
 
     const [loading, setLoading] = useState(true);
 
@@ -51,21 +55,30 @@ function EditProduct() {
     const handleSave = async (e) => {
         e.preventDefault();
 
-        const productData = {
-            ...formData,
-            costPrice: Number(formData.costPrice),
-            price: Number(formData.price),
-            initialStockLevel: Number(formData.initialStockLevel),
-            lowStockLevel: Number(formData.lowStockLevel)
-        };
+        const result = productSchema.safeParse(formData);
+        if(!result.success){
+            const fieldErrors = {};
+            result.error.issues.forEach((issue) => {
+                fieldErrors[issue.path[0]] = issue.message;
+            });
+            setErrors(fieldErrors);
+            return;
+        }
+
+        setErrors({});
 
         try {
-            await updatedProduct(id, formData);
+            await updatedProduct(id, result.data);
+
             alert("Product updated successfully!");
-            navigate("/");
+
+            navigate("/inventory");
         } catch (error) {
             console.error("Error updating product:", error);
-            alert("Failed to update product!");
+
+            const errorMessage = error.response?.data?.error || "Failed to add product!";
+
+            alert(errorMessage);
         }
     };
 
@@ -104,6 +117,7 @@ function EditProduct() {
                                     value={formData.name}
                                     onChange={handleChange}
                                 />
+                                {errors.name && <span className="field-error">{errors.name}</span>}
                             </div>
 
                             <div className="form-row">
@@ -117,6 +131,7 @@ function EditProduct() {
                                         value={formData.sku}
                                         onChange={handleChange}
                                     />
+                                    {errors.sku && <span className="field-error">{errors.sku}</span>}
                                 </div>
 
                                 <div className="form-group catagory-group">
@@ -134,6 +149,7 @@ function EditProduct() {
                                         <option value="Hardware & Electronics">Hardware & Electronics</option>
                                         <option value="Food & Beverages">Food & Beverages</option>
                                     </select>
+                                    {errors.category && <span className="field-error">{errors.category}</span>}
                                 </div>
 
                             </div>
@@ -147,6 +163,7 @@ function EditProduct() {
                                     value={formData.description}
                                     onChange={handleChange}
                                 />
+                                {errors.description && <span className="field-error">{errors.description}</span>}
                             </div>
 
                         </div>
@@ -197,6 +214,7 @@ function EditProduct() {
                                         onChange={handleChange}
                                     />
                                 </div>
+                                {errors.costPrice && <span className="field-error">{errors.costPrice}</span>}
 
                             </div>
 
@@ -213,6 +231,7 @@ function EditProduct() {
                                         onChange={handleChange}
                                     />
                                 </div>
+                                {errors.price && <span className="field-error">{errors.price}</span>}
 
                             </div>
 
@@ -235,6 +254,7 @@ function EditProduct() {
                                     value={formData.initialStockLevel}
                                     onChange={handleChange}
                                 />
+                                {errors.initialStockLevel && <span className="field-error">{errors.initialStockLevel}</span>}
                             </div>
 
                             <div className="form-group">
@@ -247,6 +267,7 @@ function EditProduct() {
                                     onChange={handleChange}
                                 />
                                 <small>System will alert when stock drops below this value.</small>
+                                {errors.lowStockLevel && <span className="field-error">{errors.lowStockLevel}</span>}
                             </div>
 
                         </div>

@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const UserRepository = require("../repositories/UserRepository");
-const { registerUserSchema } = require("../schemas/userSchema");
+const { registerUserSchema, loginUserSchema } = require("../schemas/userSchema");
 
 class UserService {
 
@@ -52,6 +52,39 @@ class UserService {
         };
 
         return await UserRepository.create(newUser);
+
+    }
+
+    async loginUser(credentials) {
+        const parsed = loginUserSchema.safeParse(credentials);
+
+        if(!parsed.success){
+            const error = new Error(parsed.error.issues[0].message);
+            error.statusCode = 400;
+            throw error;
+        }
+
+        const {username, password } = parsed.data;
+
+        const user = await UserRepository.findByUsername(username);
+
+        if(!user) {
+            const error = new Error("Invalid username or password");
+            error.statusCode = 401;
+            throw error;
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+
+       if (!isPasswordValid) {
+            const error = new Error("Invalid username or password");
+            error.statusCode = 401;
+            throw error;
+        }
+
+        const { password: _password, ...safeUser } = user.toObject();
+        
+        return safeUser;
 
     }
 

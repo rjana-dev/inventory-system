@@ -21,7 +21,7 @@ function Topnavbar() {
                 <span className="icon">❓</span>
                 <div className="signup-card">
                     <img src={profileImg} alt="profile" className="avatar"></img>
-                    <NavLink to="/signup" className="signup-txt">Sign Up</NavLink>
+                    <NavLink to="/signup" className="signup-txt">Register User</NavLink>
                 </div>
             </div>
 

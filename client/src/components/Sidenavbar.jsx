@@ -1,10 +1,19 @@
-import {NavLink} from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 import "./Sidenavbar.css";
 import profileImg from "../assets/prof.jpg";
 import logoutImg from "../assets/logout.jpg";
+import { logoutSession } from '../auth/auth';
 
 
 function Sidenavbar() {
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logoutSession();
+        navigate("/");
+    };
+
     return (
         <div className="container">
 
@@ -16,10 +25,8 @@ function Sidenavbar() {
                 </div>
 
                 <nav className="menu">
-                    <NavLink to="/dashboard" className="menu-item">Dashboard</NavLink>
+                    <NavLink to="/inventory" className="menu-item" end>Inventory</NavLink>
                     <NavLink to="/products/add" className="menu-item">Add Products</NavLink>
-                    <NavLink to="/" className="menu-item" end>Inventory</NavLink>
-                    <NavLink to="/users" className="menu-item">Users</NavLink>
                 </nav>
 
                 <div className="lower-navbar">
@@ -32,7 +39,7 @@ function Sidenavbar() {
                     </div>
                    
                    <a href="#" className="menu-item">Settings</a>
-                   <a href="#" className="menu-item logout">Logout</a>
+                   <a href="#" className="menu-item logout" onClick={handleLogout}>Logout</a>
                 </div>
             </aside>
         </div>

@@ -56,7 +56,7 @@ function AddProduct() {
             console.log("Product created:", response.data);
 
             alert("Product added successfully!");
-            navigate("/");
+            navigate("/inventory");
         } catch (error) {
             console.error("Error creating product:", error);
 

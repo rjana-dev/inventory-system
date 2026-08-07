@@ -343,3 +343,7 @@
     color: #7e818a;
     padding: 0 2px;
 }
+
+.new-product-nav {
+    text-decoration: none;
+}

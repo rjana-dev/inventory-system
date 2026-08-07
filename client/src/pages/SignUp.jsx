@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { registerUser } from "../api/userApi";
 import { registerUserSchema} from "../schemas/userSchema";
+import SignUpLogo from "../assets/signup-logo.png";
 
 function SignUp() {
 
@@ -43,7 +44,7 @@ function SignUp() {
         try {
             const response = await registerUser(formData);
             alert("Account created successfully!");
-            navigate("/");
+            navigate("/inventory");
         } catch (error) {
             const errorMessage =
                 error.response?.data?.error || "Failed to create account!";
@@ -57,10 +58,10 @@ function SignUp() {
 
             <div className="signup-container">
                 <div className="signup-component-card">
-                    <div className="signup-img-icon">📝</div>
+                    <img src={SignUpLogo} alt="Signup logo" />
 
                     <h2>Create Account</h2>
-                    <p>Register to access your inventory system</p>
+                    <p>Register new user to the System</p>
 
                     <form onSubmit={handleSubmit}>
                         <label>FULL NAME</label>

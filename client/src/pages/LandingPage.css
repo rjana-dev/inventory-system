@@ -1,3 +1,106 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
+.landing-page-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0; 
+}
+
+.left-partition{
+    width: 50%;
+    background-color: rgba(30, 78, 237, 0.972);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.left-partition h1{
+    color: white;
+}
+
+.left-partition h3{
+    color: white;
+}
+
+.right-partition{
+    width: 50%;
+    background-color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-head img{
+    height: 100px;
+    width: 100px;
+}
+
+.welcome-container{
+    height: auto;
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:  10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-container p{
+    color: #838181;
+    font-size: 15px;
+}
+
+.sign-in-btn{
+    padding: 20px 150px;
+    margin-top: 20px;
+    color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: rgba(8, 84, 216, 0.931);
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.reset-pwd a{
+    text-decoration: none;
+    color: #838181;
+}
+
+.reset-pwd a:hover{
+    color: #504d4d;
+}
+
+.rem-me{
+    margin: 5px 5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.rem-me input[type="checkbox"] {
+    height: 20px;
+    width: 20px;
+    border-radius: 2px;
+}
+
+.rem-me label{
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.field-error {
+    color: #d32f2f;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-left: 2px;
+    margin-bottom: 8px;
+    display: block;
 }
